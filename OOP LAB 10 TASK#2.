@@ -1,0 +1,48 @@
+// 24k-0559 baziluddinkhan
+#include <iostream>
+#include<fstream>
+#include<sstream>
+int main()
+{
+    std::ifstream stream;
+    
+    stream.open("vehicles.txt");
+    if(!stream)
+    {
+        std::cerr << "Sorry!. Cant Open " << std::endl;
+        return 1;
+    }
+    
+    std::cout << "Successfully Login" << std::endl;
+    std::string Word;
+    std::string Year;
+    std::string Certification;
+    std::string ExtraData;
+    std::string Type;
+    std::string Name;
+    std::string ID;
+    
+    while(getline(stream,Word))
+    {
+        std::cout << Word << std::endl;
+        std::istringstream Stream(Word); 
+        getline(Stream, Type, ',');
+        getline(Stream, ID, ',');
+        getline(Stream, Name, ',');
+        getline(Stream, Year, ',');
+        getline(Stream, ExtraData, ',');
+        getline(Stream, Certification, ',');
+            
+        
+        std::cout << "Certificate is = " << Certification << std::endl;
+        std::cout << "Year is = "<< Year << std::endl;
+        std::cout << "Extra Data = " << ExtraData << std::endl;
+        std::cout << "Id is = " << ID << std::endl;
+        std::cout << " name is " << Name << std::endl;
+        std::cout << "Type is " << Type << std::endl;
+    }
+    
+    stream.close();
+
+    return 0;
+}
