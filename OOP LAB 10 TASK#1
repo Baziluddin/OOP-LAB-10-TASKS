@@ -1,0 +1,26 @@
+//24K-0559 BAZIL-UDDIN-KHAN
+#include <iostream>
+#include<fstream>
+
+
+int main()
+{
+    std :: ifstream stream;
+    
+    stream.open("vehicles.txt");
+    if(!stream)
+    {
+        std :: cerr << "Sorry!. Cant Open " << std::endl;
+        return 1;
+    }
+    
+    std :: cout << "Successfully Login" << std::endl;
+    std::string Word;
+    
+    while(getline(stream,Word))
+    {
+        std::cout << Word << std::endl;
+    }
+
+    return 0;
+}
