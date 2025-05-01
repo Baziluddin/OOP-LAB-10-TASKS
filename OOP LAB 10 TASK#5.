@@ -1,0 +1,91 @@
+// 24k-0559 baziluddinkhan
+#include <iostream>
+#include<fstream>
+#include<string>
+#include<cstring>
+#include<sstream>
+int main()
+{
+    std::ifstream stream;
+    
+    stream.open("vehicles.txt");
+    if(!stream)
+    {
+        std::cerr << "Sorry!. Cant Open " << std::endl;
+        return 1;
+    }
+    
+    std::cout << "Successfully Login" << std::endl;
+    std:: string Word;
+    std:: string Type;
+    std::string ExtraData;
+    std::string ID;
+    std::string Name;
+    
+    while(getline(stream,Word))
+    {
+        std::cout << Word << std::endl;
+        std::istringstream Stream(Word); 
+        getline(Stream, Type, ',');
+        getline(Stream,ID,',');
+        getline(Stream,Name,',');
+        getline(Stream,Word,',');
+        getline(Stream, ExtraData, ',');
+    
+        std::cout << "Extra Data = " << ExtraData << std::endl;
+        std::cout << "Type is " << Type << std::endl;
+        std::cout << "ID is " << ID << std::endl;
+
+        size_t pos = ExtraData.find(":");
+        if(pos != std::string::npos && Type == "AutonomousCar")
+        {
+            std::string sd = ExtraData.substr(pos+1);
+            float val = stof(sd);
+            std::cout <<"It is Autunomous Car " << val << std::endl;
+        }
+        
+        else if(pos != std::string::npos && Type == "ElectricVehicle")
+        {
+            std::string sd = ExtraData.substr(pos+1);
+            int val = stoi(sd);
+            std::cout <<"It is Electric Vehicle " << val << std::endl;
+        }
+
+        else if(Type == "HybridTruck")
+        {
+            size_t pos = ExtraData.find(":");
+            size_t po = ExtraData.find("|");
+
+            if(pos != std::string::npos && po != std::string::npos)
+            {
+                std::string cargoval = ExtraData.substr(pos+1,po-pos-1);
+                int Cargo = stoi(cargoval);
+
+                size_t batterypos = ExtraData.find("Battery:");
+                if(batterypos != std::string::npos)
+                {
+                    std::string battert = ExtraData.substr(batterypos+8);
+                    int ba = stoi(battert);
+
+                    std :: cout << "It is a Hybrid Truck wit Cargo capacity " << Cargo << "and battery capacity: " << ba << std::endl;
+                }
+                else{
+                    std::cout << "Battery info not found" << std::endl;
+                }
+            }
+            else
+            {
+                std::cout<<"sorry cargo details like | not found " << std::endl;
+            }
+
+        }
+        else
+        {
+            std::cout<<"No Such Vehicles Matched" << std::endl;
+        }
+    }
+    
+    stream.close();
+
+    return 0;
+}
