@@ -1,0 +1,54 @@
+// 24k-0559 baziluddinkhan
+#include <iostream>
+#include<fstream>
+#include<string>
+#include<cstring>
+#include<sstream>
+int main()
+{
+    std::ifstream stream;
+    
+    stream.open("vehicles.txt");
+    if(!stream)
+    {
+        std::cerr << "Sorry!. Cant Open " << std::endl;
+        return 1;
+    }
+    
+    std::cout << "Successfully Login" << std::endl;
+    std:: string Word;
+    std:: string Type;
+    std::string ExtraData;
+    std::string ID;
+    
+    while(getline(stream,Word))
+    {
+        std::cout << Word << std::endl;
+        std::istringstream Stream(Word); 
+        getline(Stream, Type, ',');
+        getline(Stream, ExtraData, ',');
+        getline(Stream,ID,',');
+        std::cout << "Extra Data = " << ExtraData << std::endl;
+        std::cout << "Type is " << Type << std::endl;
+        std::cout << "ID is " << ID << std::endl;
+
+        size_t pos = ExtraData.find(":");
+        if(pos != std::string::npos && Type == "AutonomousCar")
+        {
+            std::string sd = ExtraData.substr(pos+1,ExtraData.size());
+            float val = stof(sd);
+            std::cout <<"It is Autunomous Car with software version is " << val << std::endl;
+        }
+        
+        else if(pos != std::string::npos && Type == "ElectricVehicle")
+        {
+            std::string sd = Type.substr(pos+1,Type.size());
+            int val = stoi(sd);
+            std::cout <<"It is Electric Vehicle with Battery Capacity: " << val << std::endl;
+        }
+    }
+    
+    stream.close();
+
+    return 0;
+}
