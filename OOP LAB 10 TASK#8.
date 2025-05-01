@@ -1,0 +1,53 @@
+//24k-0559 Bazil-uddin-khan
+#include<iostream>
+#include<fstream>
+#include<string>
+
+int main()
+{
+    std :: ofstream writefile;
+
+    writefile.open("config.txt");
+
+    if(!writefile)
+    {
+        std::cerr << "Sorry!. Login Unsussesfull" << std::endl;
+        return 1;
+    }
+
+    std::cout <<"Succesful Login" << std::endl;
+
+    writefile << "AAAA";
+    writefile << "BBBB";
+    writefile << "CCCC";
+
+    writefile.close();
+
+    std::fstream Bothfile("config.txt",std::ios::in | std::ios::out);
+    if(!Bothfile)
+    {
+        std::cerr << "Error in opening file" << std::endl;
+        return 1;
+    }
+
+    Bothfile.seekp(5,std::ios::beg);
+
+    Bothfile << "XXXX";
+    Bothfile.close();
+    
+    std::ifstream Readfile("config.txt");
+
+    if(!Readfile)
+    {
+        std::cerr<<"Sorry unsuccesfull" << std::endl;
+        return 1;
+    }
+
+    std::string filecontent;
+    std::getline(Readfile, filecontent);
+    std::cout <<"updated file data is " << filecontent << std::endl;
+    Readfile.close();
+
+
+
+}
