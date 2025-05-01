@@ -1,0 +1,34 @@
+//24k-0559 Bazil-uddin-khan
+#include<iostream>
+#include<fstream>
+#include<string>
+
+int main()
+{
+    std :: ofstream writefile;
+
+    writefile.open("sensor_log.txt");
+
+    if(!writefile)
+    {
+        std::cerr << "Sorry!. Login Unsussesfull" << std::endl;
+        return 1;
+    }
+
+    std::cout<<"Sucessful login" <<std::endl;
+
+    writefile << "Sensor 1: 25.5 C\n";
+    std::streampos Pos1 = writefile.tellp();
+    std::cout << " Pos position after first write " << Pos1 << std::endl;
+
+    writefile << "Sensor 2: 98.1 %RH\n";
+    std::streampos Pos2 = writefile.tellp();
+    std::cout << " Pos position after second write " << Pos2 << std::endl;
+    
+    writefile << "Sensor 3: 198.1 %RH\n";
+    std::streampos Pos3 = writefile.tellp();
+    std::cout << " Pos position after third write " << Pos3 << std::endl;
+
+    writefile.close();
+
+}
