@@ -1,0 +1,43 @@
+//24k-0559 Bazil-uddin-khan
+#include<iostream>
+#include<fstream>
+#include<cstring>
+
+class InventorySystem
+{
+    public:
+    char itemName[20];
+    int itemID;
+
+};
+
+int main()
+{
+    InventorySystem inventory;
+    inventory.itemID = 112;
+    strcpy(inventory.itemName,"Laptop");
+
+    std::ofstream stream("inventoy.dat",std::ios::binary);
+    if(!stream)
+    {
+        std::cerr<<"Error in opening file" << std::endl;
+        return 0;
+    }
+
+    stream.write((char*)&inventory,sizeof(inventory));
+    stream.close();
+    
+    InventorySystem inven;
+    std::ifstream streamd("inventoy.dat",std::ios::binary);
+    if(!streamd)
+    {
+        std::cerr<<"Error in opening file" << std::endl;
+        return 0;
+    }
+
+    streamd.read((char*)&inven,sizeof(inven));
+    streamd.close();
+
+    std::cout << "ID IS :" << inven.itemID << std::endl;
+    std::cout << "Name IS :" << inven.itemName << std::endl;
+}
