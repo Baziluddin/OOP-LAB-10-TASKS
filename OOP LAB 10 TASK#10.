@@ -1,0 +1,24 @@
+//24K-0559 BAZIL-UDDIN-KHAN
+#include<iostream>
+#include<fstream>
+
+int main()
+{
+    std::ifstream infile;
+    infile.open("data_records.txt");
+
+    if(!infile)
+    {
+        std::cout << "Error in opening file " << std::endl;
+        return 1;
+    }
+
+    infile.seekg(25,std::ios::beg);
+
+    std::string Record;
+    std::getline(infile,Record);
+    std::cout << " Third Record is :" << Record << std::endl;
+
+    infile.close();
+
+}
