@@ -1,0 +1,32 @@
+//24K-0559 BAZIL-UDDIN-KHAN
+#include<iostream>
+#include<fstream>
+
+int main()
+{
+    std::ifstream infile;
+
+    infile.open("large_log.txt");
+
+    if(!infile)
+    {
+      std::cout << "Unsussecful In OPening " << std::endl;
+      return 1;
+    }
+
+    char Temp[11];
+
+    infile.read(Temp,10);
+    std::streampos position = infile.tellg();
+    int index = 0;
+    std::cout << "Position Ater " << index << " read is " << position << std::endl;
+
+    infile.read(Temp,10);
+    std::streampos position1 = infile.tellg();
+    std::cout << "Position Ater " << index+1 << " read is " << position1 << std::endl;
+    
+    infile.close();
+    return 0;
+
+
+}
